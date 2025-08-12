@@ -1,5 +1,5 @@
 """
-URL configuration for map project.
+URL configuration for where_to_go project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from where_to_go import views
+from places import views
 
 
 urlpatterns = [
