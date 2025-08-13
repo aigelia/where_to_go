@@ -20,3 +20,22 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title if len(self.title) <= 30 else self.title[:27] + '...'
+
+
+class PlaceImage(models.Model):
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE,
+        related_name='images'
+    )
+    image = models.ImageField(upload_to='places/')
+    description = models.CharField(max_length=200, blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Изображения места"
+        verbose_name_plural = "Изображения мест"
+
+    def __str__(self):
+        return f"{self.id} — {self.place.title}"
