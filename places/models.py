@@ -14,5 +14,9 @@ class Place(models.Model):
     lat = models.FloatField(verbose_name='Широта')
     lng = models.FloatField(verbose_name='Долгота')
 
+    class Meta:
+        verbose_name = "Место"
+        verbose_name_plural = "Места"
+
     def __str__(self):
         return self.title if len(self.title) <= 30 else self.title[:27] + '...'
