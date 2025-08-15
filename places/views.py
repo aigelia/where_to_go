@@ -1,5 +1,6 @@
 from django.db.models.expressions import result
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 
 from places.models import Place
 
@@ -32,3 +33,8 @@ def index(request):
         "places_geojson": places_geojson,
     }
     return render(request, "index.html", context)
+
+
+def place(request, place_id):
+    place_obj = get_object_or_404(Place, id=place_id)
+    return HttpResponse(place_obj.title)
