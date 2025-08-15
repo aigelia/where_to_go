@@ -1,6 +1,6 @@
-from django.db.models.expressions import result
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from places.models import Place
 
@@ -17,7 +17,7 @@ def get_geojson():
             "properties": {
                 "title": place.title,
                 "placeId": f"place_{place.id}",
-                "detailsUrl": "Заглушка"
+                "detailsUrl": reverse('place-detail', args=[place.id])
             }
         })
 
