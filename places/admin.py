@@ -1,3 +1,4 @@
+# admin.py
 from django.contrib import admin
 from .models import Place, PlaceImage
 
@@ -5,7 +6,8 @@ from .models import Place, PlaceImage
 class PlaceImageInline(admin.TabularInline):
     model = PlaceImage
     extra = 1
-    fields = ('image', 'description', 'order')
+    fields = ('image', 'image_preview', 'order')
+    readonly_fields = ('image_preview',)
     ordering = ('order',)
 
 
@@ -18,7 +20,8 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(PlaceImage)
 class PlaceImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'place', 'description',)
+    list_display = ('id', 'place', 'image_preview')
     list_filter = ('place',)
     search_fields = ('description', 'place__title')
     ordering = ('place', 'order')
+    readonly_fields = ('image_preview',)

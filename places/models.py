@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html
 
 
 class Place(models.Model):
@@ -29,8 +30,17 @@ class PlaceImage(models.Model):
         related_name='images'
     )
     image = models.ImageField(upload_to='places/')
-    description = models.CharField(max_length=200, blank=True)
+    description = models.CharField(max_length=200, blank=True) # удалить если не нужно
     order = models.PositiveIntegerField(default=0)
+
+    def image_preview(self):
+        try:
+            return format_html(
+                '<img src="{}" width="150" style="object-fit: contain;" />',
+                self.image.url
+            )
+        except (ValueError, AttributeError):
+            return "-"
 
     class Meta:
         ordering = ['order']
