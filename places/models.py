@@ -31,7 +31,6 @@ class PlaceImage(models.Model):
         related_name='images'
     )
     image = models.ImageField(upload_to='places/')
-    description = models.CharField(max_length=200, blank=True) # удалить если не нужно
     order = models.PositiveIntegerField(default=0)
 
     def image_preview(self):
