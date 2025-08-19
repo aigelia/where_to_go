@@ -32,10 +32,17 @@ class PlaceImage(models.Model):
     place = models.ForeignKey(
         Place,
         on_delete=models.CASCADE,
-        related_name='images'
+        related_name='images',
+        verbose_name='Место или событие, к которому относится изображение'
     )
-    image = models.ImageField(upload_to='places/')
-    order = models.PositiveIntegerField(default=0)
+    image = models.ImageField(
+        upload_to='places/',
+        verbose_name='Директория для сохранения изображений'
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        verbose_name='Порядковый номер картинки в галерее'
+    )
 
     def image_preview(self):
         try:
