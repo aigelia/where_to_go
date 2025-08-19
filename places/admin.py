@@ -24,3 +24,4 @@ class PlaceImageAdmin(admin.ModelAdmin):
     search_fields = ('place__title',)
     ordering = ('place', 'order')
     readonly_fields = ('image_preview',)
+    autocomplete_fields = ('place',)
