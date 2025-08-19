@@ -25,7 +25,7 @@ class Command(BaseCommand):
         try:
             data = response.json()
         except ValueError:
-            self.stderr.write("Ошибка: полученные данные не являются JSON")
+            self.stderr.write('Ошибка: полученные данные не являются JSON')
             return
 
         lat = data.get('coordinates', {}).get('lat')
@@ -41,28 +41,28 @@ class Command(BaseCommand):
             }
         )
         if created:
-            self.stdout.write("Объект создан. Загружаем картинки...")
+            self.stdout.write('Объект создан. Загружаем картинки...')
         else:
-            self.stdout.write("Объект уже существовал. Загрузка остановлена.")
+            self.stdout.write('Объект уже существовал. Загрузка остановлена.')
             return
 
         for url in data.get('imgs', []):
-            image_name = url.split("/")[-1]
+            image_name = url.split('/')[-1]
 
             if PlaceImage.objects.filter(place=place, image=f'places/{image_name}').exists():
-                self.stdout.write(f"Изображение {image_name} уже существует, пропускаем...")
+                self.stdout.write(f'Изображение {image_name} уже существует, пропускаем...')
                 continue
 
             try:
                 img_response = requests.get(url)
                 img_response.raise_for_status()
             except requests.RequestException as e:
-                self.stderr.write(f"Не удалось загрузить {url}: {e}")
+                self.stderr.write(f'Не удалось загрузить {url}: {e}')
                 continue
 
             place_image = PlaceImage(place=place)
             place_image.image.save(image_name, ContentFile(img_response.content), save=True)
-            self.stdout.write(f"Добавлено изображение {image_name}")
+            self.stdout.write(f'Добавлено изображение {image_name}')
 
-        self.stdout.write("Загрузка завершена")
+        self.stdout.write('Загрузка завершена')
         return

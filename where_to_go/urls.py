@@ -7,10 +7,10 @@ from places import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index),
-    path('places/<int:place_id>/', views.get_place_data, name='place-detail'),
-    path('tinymce/', include('tinymce.urls')),
+    path("admin/", admin.site.urls),
+    path("", views.index),
+    path("places/<int:place_id>/", views.get_place_data, name="place-detail"),
+    path("tinymce/", include("tinymce.urls")),
 ]
 
 if settings.DEBUG:

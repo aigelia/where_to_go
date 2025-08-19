@@ -21,8 +21,8 @@ class Place(models.Model):
     lng = models.FloatField(verbose_name='Долгота')
 
     class Meta:
-        verbose_name = "Место"
-        verbose_name_plural = "Места"
+        verbose_name = 'Место'
+        verbose_name_plural = 'Места'
 
     def __str__(self):
         return textwrap.shorten(self.title, 30)
@@ -51,15 +51,15 @@ class PlaceImage(models.Model):
                 self.image.url
             )
         except (ValueError, AttributeError):
-            return "-"
+            return '-'
 
     class Meta:
         ordering = ['order']
-        verbose_name = "Изображения места"
-        verbose_name_plural = "Изображения мест"
+        verbose_name = 'Изображения места'
+        verbose_name_plural = 'Изображения мест'
         indexes = [
-            models.Index(fields=["place", "order"]),
+            models.Index(fields=['place', 'order']),
         ]
 
     def __str__(self):
-        return f"{self.id} — {self.place.title}"
+        return f'{self.id} — {self.place.title}'

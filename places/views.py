@@ -17,7 +17,7 @@ def get_geojson():
             "properties": {
                 "title": place.title,
                 "placeId": f"place_{place.id}",
-                "detailsUrl": reverse('place-detail', args=[place.id])
+                "detailsUrl": reverse("place-detail", args=[place.id])
             }
         })
 

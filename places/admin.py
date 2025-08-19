@@ -6,22 +6,22 @@ from .models import Place, PlaceImage
 class PlaceImageInline(SortableStackedInline):
     model = PlaceImage
     extra = 1
-    fields = ('image', 'image_preview')
-    readonly_fields = ('image_preview',)
+    fields = ("image", "image_preview")
+    readonly_fields = ("image_preview",)
 
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
-    list_display = ('title', 'short_description')
-    search_fields = ('title',)
+    list_display = ("title", "short_description")
+    search_fields = ("title",)
     inlines = [PlaceImageInline]
 
 
 @admin.register(PlaceImage)
 class PlaceImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'place', 'image_preview')
-    list_filter = ('place',)
-    search_fields = ('place__title',)
-    ordering = ('place', 'order')
-    readonly_fields = ('image_preview',)
-    autocomplete_fields = ('place',)
+    list_display = ("id", "place", "image_preview")
+    list_filter = ("place",)
+    search_fields = ("place__title",)
+    ordering = ("place", "order")
+    readonly_fields = ("image_preview",)
+    autocomplete_fields = ("place",)
