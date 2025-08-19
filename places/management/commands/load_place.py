@@ -23,19 +23,19 @@ class Command(BaseCommand):
         response.raise_for_status()
 
         try:
-            data = response.json()
+            raw_place = response.json()
         except ValueError:
             self.stderr.write('Ошибка: полученные данные не являются JSON')
             return
 
-        lat = data.get('coordinates', {}).get('lat')
-        lng = data.get('coordinates', {}).get('lng')
+        lat = raw_place.get('coordinates', {}).get('lat')
+        lng = raw_place.get('coordinates', {}).get('lng')
 
         place, created = Place.objects.get_or_create(
-            title=data.get('title'),
+            title=raw_place.get('title'),
             defaults={
-                'short_description': data.get('description_short'),
-                'long_description': data.get('description_long'),
+                'short_description': raw_place.get('description_short'),
+                'long_description': raw_place.get('description_long'),
                 'lat': lat,
                 'lng': lng,
             }
@@ -46,7 +46,7 @@ class Command(BaseCommand):
             self.stdout.write('Объект уже существовал. Загрузка остановлена.')
             return
 
-        for url in data.get('imgs', []):
+        for url in raw_place.get('imgs', []):
             image_name = url.split('/')[-1]
 
             if PlaceImage.objects.filter(place=place, image=f'places/{image_name}').exists():
