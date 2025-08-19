@@ -41,8 +41,8 @@ def get_place_data(request, place_id):
     data = {
         "title": place_obj.title,
         "imgs": [img.image.url for img in place_obj.images.all()],
-        "description_short": place_obj.description_short,
-        "description_long": place_obj.description_long,
+        "description_short": place_obj.short_description,
+        "description_long": place_obj.long_description,
         "coordinates": {
             "lng": str(place_obj.lng),
             "lat": str(place_obj.lat)

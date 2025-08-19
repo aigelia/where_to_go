@@ -12,7 +12,7 @@ class PlaceImageInline(SortableStackedInline):
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
-    list_display = ('title', 'description_short')
+    list_display = ('title', 'short_description')
     search_fields = ('title',)
     inlines = [PlaceImageInline]
 
@@ -21,6 +21,6 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 class PlaceImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'place', 'image_preview')
     list_filter = ('place',)
-    search_fields = ('description', 'place__title')
+    search_fields = ('place__title',)
     ordering = ('place', 'order')
     readonly_fields = ('image_preview',)
