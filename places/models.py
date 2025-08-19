@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.html import format_html
 from tinymce.models import HTMLField
+import textwrap
 
 
 class Place(models.Model):
@@ -24,7 +25,7 @@ class Place(models.Model):
         verbose_name_plural = "Места"
 
     def __str__(self):
-        return self.title if len(self.title) <= 30 else self.title[:27] + '...'
+        return textwrap.shorten(self.title, 30)
 
 
 class PlaceImage(models.Model):
