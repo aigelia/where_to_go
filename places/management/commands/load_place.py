@@ -33,11 +33,11 @@ class Command(BaseCommand):
 
         place, created = Place.objects.get_or_create(
             title=raw_place.get('title'),
+            lat=lat,
+            lng=lng,
             defaults={
-                'short_description': raw_place.get('description_short'),
-                'long_description': raw_place.get('description_long'),
-                'lat': lat,
-                'lng': lng,
+                'short_description': raw_place.get('description_short', ''),
+                'long_description': raw_place.get('description_long', ''),
             }
         )
         if created:
