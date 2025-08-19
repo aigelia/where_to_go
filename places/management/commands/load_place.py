@@ -60,8 +60,10 @@ class Command(BaseCommand):
                 self.stderr.write(f'Не удалось загрузить {url}: {e}')
                 continue
 
-            place_image = PlaceImage(place=place)
-            place_image.image.save(image_name, ContentFile(img_response.content), save=True)
+            PlaceImage.objects.create(
+                place=place,
+                image=ContentFile(img_response.content, name=image_name)
+            )
             self.stdout.write(f'Добавлено изображение {image_name}')
 
         self.stdout.write('Загрузка завершена')
