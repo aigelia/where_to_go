@@ -36,8 +36,10 @@ def index(request):
 
 
 def get_place_data(request, place_id):
-    place_obj = get_object_or_404(Place, id=place_id)
-
+    place_obj = get_object_or_404(
+        Place.objects.prefetch_related('images'),
+        id=place_id
+    )
     data = {
         "title": place_obj.title,
         "imgs": [img.image.url for img in place_obj.images.all()],
