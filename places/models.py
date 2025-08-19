@@ -57,6 +57,9 @@ class PlaceImage(models.Model):
         ordering = ['order']
         verbose_name = "Изображения места"
         verbose_name_plural = "Изображения мест"
+        indexes = [
+            models.Index(fields=["place", "order"]),
+        ]
 
     def __str__(self):
         return f"{self.id} — {self.place.title}"
