@@ -1,7 +1,8 @@
+import textwrap
+
 from django.db import models
 from django.utils.html import format_html
 from tinymce.models import HTMLField
-import textwrap
 
 
 class Place(models.Model):
