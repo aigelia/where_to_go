@@ -66,6 +66,7 @@ class PlaceImage(models.Model):
         verbose_name_plural = 'Изображения мест'
         indexes = [
             models.Index(fields=['place', 'order']),
+            models.Index(fields=['order']),
         ]
 
     def __str__(self):
