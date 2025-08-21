@@ -54,7 +54,7 @@ class PlaceImage(models.Model):
     def image_preview(self):
         try:
             return format_html(
-                '<img src="{}" style="object-fit: contain; max-width: 150px" />',
+                '<img src="{}" style="object-fit: contain; max-width: 150px; max-height: 150px;" />',
                 self.image.url
             )
         except (ValueError, AttributeError):
