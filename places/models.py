@@ -32,7 +32,7 @@ class Place(models.Model):
         ]
 
     def __str__(self):
-        return textwrap.shorten(self.title, 30)
+        return textwrap.shorten(self.title, 30, placeholder="...")
 
 
 class PlaceImage(models.Model):
