@@ -43,8 +43,8 @@ def get_place_data(request, place_id):
     serialized_place = {
         "title": place_obj.title,
         "imgs": [img.image.url for img in place_obj.images.all()],
-        "description_long": place_obj.short_description,
-        "description_short": place_obj.long_description,
+        "description_long": place_obj.long_description,
+        "description_short": place_obj.short_description,
         "coordinates": {
             "lng": str(place_obj.lng),
             "lat": str(place_obj.lat)
